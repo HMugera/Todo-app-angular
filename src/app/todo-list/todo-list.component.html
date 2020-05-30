@@ -1,0 +1,27 @@
+<img class="logo" width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0c
+DovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KIC
+AgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjI
+gMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxs
+PSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzM
+HoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43
+LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<h1>Todo List</h1>
+<form #f="ngForm" (ngSubmit)='f.form.valid && addTodo(f)'>
+    <input type="text" name="todoTitle" class="todo-input border-danger" placeholder="What needs to be done" [(ngModel)]='todoTitle' required #todo='ngModel' [ngClass]="{'border-danger':f.submitted && todo.invalid}">
+    <button type="submit" class="btn">{{dataStatus}}</button>
+    <div class="text-danger ml-3" *ngIf='f.submitted && todo.invalid && todo.errors.required'>
+        Category is required
+    </div>
+</form>
+
+
+<div class="todo-item" *ngFor="let todo of todos">
+    <div class="todo-item-left">
+        <input type="checkbox" [(ngModel)]="todo.data.completed">
+        <div class="todo-item-label" [style.color]='todo.data.colorCode' (click)='onEdit(todo.data.title,todo.id)' [ngClass]="{'completed':todo.data.completed}">{{todo.data.title}}</div>
+    </div>
+    <div class="remove-item" (click)='delete(todo.id)'>
+        &times;
+    </div>
+</div>
+
